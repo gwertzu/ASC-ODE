@@ -56,6 +56,27 @@ namespace ASC_ode
         }
     };
 
+    class CrankNicolson : public TimeStepper
+    {
+        ExplicitEuler m_explicitEuler;
+        ImplicitEuler m_implicitEuler;
+
+    public:
+        CrankNicolson(std::shared_ptr<NonlinearFunction> rhs)
+            : TimeStepper(rhs), m_explicitEuler(rhs), m_implicitEuler(rhs) {}
+
+        void DoStep(double tau, VectorView<double> y) override
+        {
+            Vector<double> y_explicit = y;
+            m_explicitEuler.DoStep(tau, y_explicit);
+
+            Vector<double> y_implicit = y;
+            m_implicitEuler.DoStep(tau, y_implicit);
+
+            y = 0.5 * (y_explicit + y_implicit);
+        }
+    };
+
 
     class ImprovedEuler : public TimeStepper
     {
@@ -78,7 +99,56 @@ namespace ASC_ode
         }
     };
 
+/*
+    class CrankNicholson : public TimeStepper
+    {
+        std::shared_ptr<NonlinearFunction> m_equ;
+        std::shared_ptr<Parameter> m_tau;
+        std::shared_ptr<ConstantFunction> m_yold;
+        std::shared_ptr<ConstantFunction> m_ynew;
+        Vector<> m_vecf_old;
+        Vector<> m_vecf_new;
 
+    public:
+        CrankNicholson(std::shared_ptr<NonlinearFunction> rhs)
+            : TimeStepper(rhs), m_tau(std::make_shared<Parameter>(0.0)),
+            m_yold(std::make_shared<ConstantFunction>(rhs->dimX())),
+            m_ynew(std::make_shared<ConstantFunction>(rhs->dimX())),
+            m_vecf_old(rhs->dimF()), m_vecf_new(rhs->dimF())
+        {
+            auto ynew = std::make_shared<IdentityFunction>(rhs->dimX());
+            double tau_value = m_tau->get(); 
+            //m_equ = ynew - m_yold - tau_value * 0.5 * (m_rhs + m_rhs);
+            //m_equ = ynew->get() - m_yold->get() - tau_value * 0.5 * (
+            //    m_rhs->evaluate(ynew->get(), m_vecf_new) + 
+            //    m_rhs->evaluate(m_yold->get(), m_vecf_old)
+            //);
+
+        }
+
+        void DoStep(double tau, VectorView<double> y) override
+        {
+            // Setze alten Wert
+            m_yold->set(y);
+            m_tau->set(tau);
+
+            // Berechne f(y^n) für den alten Wert (explizit)
+            this->m_rhs->evaluate(y, m_vecf_old);
+
+            // Berechne f(y^{n+1}) für den neuen Wert (implizit)
+            m_ynew->set(y);
+            this->m_rhs->evaluate(y, m_vecf_new);
+
+            // Crank-Nicholson-Gleichung: (y^{n+1} - y^n) = tau / 2 * (f(y^{n+1}) + f(y^n))
+            // Das wird zu: y^{n+1} - tau/2 * f(y^{n+1}) = y^n + tau/2 * f(y^n)
+            // Numerische Lösung der Gleichung für den nächsten Wert y^{n+1}
+            
+            // Implementiere hier einen numerischen Löser, z. B. Newton-Verfahren, um y^{n+1} zu berechnen
+            NewtonSolver(m_equ, y);
+        }
+    };
+
+*/  
 
 }
 
