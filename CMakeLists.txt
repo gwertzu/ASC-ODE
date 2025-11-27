@@ -11,6 +11,7 @@ add_subdirectory (nanoblas)
 
 add_compile_options(-fpermissive)
 
+add_subdirectory (mechsystem)
 
 add_executable (test_ode demos/test_ode.cpp)
 target_link_libraries (test_ode PUBLIC nanoblas)
