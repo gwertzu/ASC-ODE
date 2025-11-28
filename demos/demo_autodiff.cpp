@@ -24,10 +24,34 @@ T test_log (T x)
   return log(x);
 }
 
+template <typename T>
+T test_log2 (T x)
+{
+  return log2(x);
+}
+
+template <typename T>
+T test_log10 (T x)
+{
+  return log10(x);
+}
+
 template <typename T, typename U = double>
 T test_pow_1 (T x, U y)
 {
   return pow(x,y);
+}
+
+template <typename T>
+T test_div (T x, T y)
+{
+  return x/y;
+}
+
+template <typename T>
+T test_minus (T x, T y)
+{
+  return x-y;
 }
 
 /*
@@ -53,7 +77,11 @@ int main()
   std::cout << "func1(adx, ady) = " << func1(adx, ady) << std::endl;
   std::cout << "test_cos(adx) = " << test_cos(adx) << std::endl;
   std::cout << "test_log(adx) = " << test_log(adx) << std::endl;
+  std::cout << "test_log2(adx) = " << test_log2(adx) << std::endl;
+  std::cout << "test_log10(adx) = " << test_log10(adx) << std::endl;
   std::cout << "test_pow_1(adx, 3) = " << test_pow_1(adx, 3.0) << std::endl;
+  std::cout << "test_div(adx, ady) = " << test_div(adx, ady) << std::endl;
+  std::cout << "test_minus(adx, ady) = " << test_minus(adx, ady) << std::endl;
   //std::cout << "test_pow_2(3, ady) = " << test_pow_2(3.0, ady) << std::endl;
 
   /*

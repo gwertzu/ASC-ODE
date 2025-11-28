@@ -92,8 +92,17 @@ namespace ASC_ode
        return result;
    }
 
+  template <size_t N, typename T = double>
+  AutoDiff<N, T> operator- (const AutoDiff<N, T>& a, const AutoDiff<N, T>& b)
+  {
+     AutoDiff<N, T> result(a.value() - b.value());
+     for (size_t i = 0; i < N; i++)
+        result.deriv()[i] = a.deriv()[i] - b.deriv()[i];
+       return result;
+   }
+
    template <size_t N, typename T = double>
-   auto operator- (T a, const AutoDiff<N, T>& b) { return AutoDiff<N, T>(a) - b; }
+   auto operator- (T a, const AutoDiff<N, T>& b) { return a - AutoDiff<N, T>(b); }
 
    using std::pow;
 
