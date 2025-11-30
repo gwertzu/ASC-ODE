@@ -4,6 +4,7 @@
 #include <nonlinfunc.hpp>
 #include <timestepper.hpp>
 #include <implicitRK.hpp>
+#include <explicitRK.hpp>
 
 using namespace ASC_ode;
 
@@ -73,7 +74,7 @@ int main()
   auto [Gauss3a,Gauss3b] = ComputeABfromC (Gauss3c);
   std::cout << "Gauss3a = " << Gauss3a << std::endl;
   std::cout << "Gauss3b = " << Gauss3a << std::endl;
-  ImplicitRungeKutta stepper(rhs, Gauss3a, Gauss3b, Gauss3c);
+  ExplicitRungeKutta stepper(rhs, Gauss3a, Gauss3b, Gauss3c);
   
 
   /*
