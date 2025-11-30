@@ -24,3 +24,6 @@ target_link_libraries (legendre PUBLIC nanoblas)
 
 add_executable (pendulumAD demos/pendulumAD.cpp)
 target_link_libraries (pendulumAD PUBLIC nanoblas)
+
+add_executable (electric_network demos/electric_network.cpp)
+target_link_libraries (test_ode PUBLIC nanoblas)
