@@ -21,3 +21,6 @@ target_link_libraries (demo_autodiff PUBLIC nanoblas)
 
 add_executable (legendre demos/legendre.cpp)
 target_link_libraries (legendre PUBLIC nanoblas)
+
+add_executable (pendulumAD demos/pendulumAD.cpp)
+target_link_libraries (pendulumAD PUBLIC nanoblas)
