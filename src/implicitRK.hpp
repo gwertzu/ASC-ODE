@@ -4,6 +4,8 @@
 #include <vector.hpp>
 #include <matrix.hpp>
 #include <inverse.hpp>
+#include <cmath>
+#include <vector>
 
 namespace ASC_ode {
   using namespace nanoblas;
@@ -226,6 +228,177 @@ void GaussRadau (VectorView<> x, VectorView<> w)
     sum += w(i);
   w(x.size()-1) = 1-sum;
 }
+
+using Doub = double;
+using Int  = int;
+using VecDoub_O = std::vector<double>;
+void gauleg(const Doub x1, const Doub x2, VecDoub_O &x, VecDoub_O &w) // modified from [https://numerical.recipes/book.html]
+/*
+Given the lower and upper limits of integration x1 and x2, this routine returns arrays
+x[0..n-1] and w[0..n-1] of length n, containing the abscissas and weights of the
+Gauss-Legendre n-point quadrature formula.
+*/
+{
+    const Doub EPS = 1.0e-14;   // Relative precision
+    Doub z1, z, xm, xl, pp, p3, p2, p1;
+    Int n = x.size();
+    Int m = (n + 1) / 2;        // The roots are symmetric, so we only compute half
+
+    xm = 0.5 * (x2 + x1);
+    xl = 0.5 * (x2 - x1);
+
+    for (Int i = 0; i < m; i++) {   // Loop over the desired roots
+        // Initial approximation to the i-th root
+        z = std::cos(3.141592654 * (i + 0.75) / (n + 0.5));
+        // Newton iteration
+        do {
+            p1 = 1.0;
+            p2 = 0.0;
+            // Recurrence to compute Legendre polynomial P_n(z)
+            for (Int j = 0; j < n; j++) {
+                p3 = p2;
+                p2 = p1;
+                p1 = ((2.0 * j + 1.0) * z * p2 - j * p3) / (j + 1);
+            }
+            // Derivative of P_n(z)
+            pp = n * (z * p1 - p2) / (z * z - 1.0);
+            z1 = z;
+            z = z1 - p1 / pp;    // Newton step
+        } while (std::abs(z - z1) > EPS);
+        // Scale root to [x1, x2] and assign symmetric partners
+        x[i]       = xm - xl * z;
+        x[n - 1 - i] = xm + xl * z;
+        // Weights
+        w[i]         = 2.0 * xl / ((1.0 - z * z) * pp * pp);
+        w[n - 1 - i] = w[i];
+    }
+}
+
+#include <cmath>
+#include <vector>
+using Doub = double;
+using Int  = int;
+using VecDoub_O = std::vector<double>;
+
+// You must implement gammln or replace it with std::lgamma
+// extern double gammln(double x);
+
+void gaujac(VecDoub_O &x, VecDoub_O &w, const Doub alf, const Doub bet) // modified from [https://numerical.recipes/book.html]
+/*
+Given alf and bet, the parameters α and β of the Jacobi polynomials,
+this routine returns arrays x[0..n-1] and w[0..n-1] containing the
+abscissas and weights of the n-point Gauss–Jacobi quadrature formula.
+The largest abscissa is returned in x[0], the smallest in x[n-1].
+*/
+{
+    const Int MAXIT = 10;
+    const Doub EPS  = 1.0e-14;      // Relative precision
+
+    Int i, its, j;
+    Doub alfbet, an, bn, r1, r2, r3;
+    Doub a, b, c, p1, p2, p3, pp, temp, z, z1;
+
+    Int n = x.size();
+
+    for (i = 0; i < n; i++) {  // Loop over desired roots
+
+        // ---- Initial guesses for roots ----------------------------
+        if (i == 0) {
+            // Largest root
+            an = alf / n;
+            bn = bet / n;
+            r1 = (1.0 + alf) * (2.78 / (4.0 + n*n) + 0.768 * an / n);
+            r2 = 1.0 + 1.48 * an + 0.96 * bn + 0.452 * an * an + 0.83 * an * bn;
+            z  = 1.0 - r1 / r2;
+
+        } else if (i == 1) {
+            // Second largest root
+            r1 = (4.1 + alf) / ((1.0 + alf) * (1.0 + 0.156 * alf));
+            r2 = 1.0 + 0.06 * (n - 8.0) * (1.0 + 0.12 * alf) / n;
+            r3 = 1.0 + 0.012 * bet * (1.0 + 0.25 * std::abs(alf)) / n;
+            z -= (1.0 - z) * r1 * r2 * r3;
+
+        } else if (i == 2) {
+            // Third largest root
+            r1 = (1.67 + 0.28 * alf) / (1.0 + 0.37 * alf);
+            r2 = 1.0 + 0.22 * (n - 8.0) / n;
+            r3 = 1.0 + 8.0 * bet / ((6.28 + bet) * n * n);
+            z -= (x[0] - z) * r1 * r2 * r3;
+
+        } else if (i == n - 2) {
+            // Second smallest root
+            r1 = (1.0 + 0.235 * bet) / (0.766 + 0.119 * bet);
+            r2 = 1.0 / (1.0 + 0.639 * (n - 4.0) / (1.0 + 0.71 * (n - 4.0)));
+            r3 = 1.0 / (1.0 + 20.0 * alf / ((7.5 + alf) * n * n));
+            z += (z - x[n - 4]) * r1 * r2 * r3;
+
+        } else if (i == n - 1) {
+            // Smallest root
+            r1 = (1.0 + 0.37 * bet) / (1.67 + 0.28 * bet);
+            r2 = 1.0 / (1.0 + 0.22 * (n - 8.0) / n);
+            r3 = 1.0 / (1.0 + 8.0 * alf / ((6.28 + alf) * n * n));
+            z += (z - x[n - 3]) * r1 * r2 * r3;
+
+        } else {
+            // General case (extrapolation)
+            z = 3.0 * x[i - 1] - 3.0 * x[i - 2] + x[i - 3];
+        }
+
+        // ---- Newton refinement ------------------------------------
+        alfbet = alf + bet;
+
+        for (its = 1; its <= MAXIT; its++) {
+
+            temp = 2.0 + alfbet;
+
+            // Start recurrence with P₀ and P₁
+            p1 = (alf - bet + temp * z) / 2.0;
+            p2 = 1.0;
+
+            // Recurrence relation for Jacobi polynomial Pₙ(z)
+            for (j = 2; j <= n; j++) {
+                p3 = p2;
+                p2 = p1;
+
+                temp = 2*j + alfbet;
+                a = 2.0 * j * (j + alfbet) * (temp - 2.0);
+                b = (temp - 1.0) *
+                    (alf*alf - bet*bet + temp*(temp - 2.0) * z);
+                c = 2.0 * (j - 1 + alf) * (j - 1 + bet) * temp;
+
+                p1 = (b * p2 - c * p3) / a;
+            }
+
+            // Derivative of Jacobi polynomial
+            pp = ( n * (alf - bet - temp * z) * p1
+                 + 2.0 * (n + alf) * (n + bet) * p2 )
+                 / ( temp * (1.0 - z*z) );
+
+            // Newton step
+            z1 = z;
+            z  = z1 - p1 / pp;
+
+            if (std::abs(z - z1) <= EPS) break;
+        }
+
+        if (its > MAXIT) throw("too many iterations in gaujac");
+
+        // Store root and weight
+        x[i] = z;
+
+        w[i] =
+            std::exp(
+                std::lgamma(alf + n)
+                + std::lgamma(bet + n)
+                - std::lgamma(n + 1.0)
+                - std::lgamma(n + alfbet + 1.0)
+            )
+            * (2.0 + alfbet)
+            * std::pow(2.0, alfbet)
+            / (pp * p2);
+    }
+}
+
 }
 
 #endif // IMPLICITRK_HPP

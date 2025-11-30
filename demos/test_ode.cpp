@@ -52,19 +52,29 @@ int main()
 
 
 /*
-  Vector<> Radau(3), RadauWeight(3);
+  Vector<> Radau(2), RadauWeight(2); // two point Radau IIa needs Radau(2) and RaduaWeight(2)
   GaussRadau (Radau, RadauWeight);
   // not sure about weights, comput them via ComputeABfromC
-  cout << "Radau = " << Radau << ", weight = " << RadauWeight <<  endl;
+  std::cout << "Radau = " << Radau << ", weight = " << RadauWeight <<  std::endl;
         Vector<> Gauss2c(2), Gauss3c(3);
+  auto [Radau2a,Radau2b] = ComputeABfromC (Radau);
+  std::cout << "Radau2a = " << Radau2a << ", Radau2b = " << Radau2b <<  std::endl;
+  ImplicitRungeKutta stepper(rhs, Radau2a, Radau2b, Radau);
 */
 
+  
   // RungeKutta stepper(rhs, Gauss2a, Gauss2b, Gauss2c);
-
+  //auto [Gauss2a,Gauss2b] = ComputeABfromC (Gauss2c);
+  //std::cout << "Gauss2a = " << Gauss2a << std::endl;
+  //std::cout << "Gauss2b = " << Gauss2a << std::endl;
+  
+  
   // Gauss3c .. points tabulated, compute a,b:
   auto [Gauss3a,Gauss3b] = ComputeABfromC (Gauss3c);
+  std::cout << "Gauss3a = " << Gauss3a << std::endl;
+  std::cout << "Gauss3b = " << Gauss3a << std::endl;
   ImplicitRungeKutta stepper(rhs, Gauss3a, Gauss3b, Gauss3c);
-
+  
 
   /*
   // arbitrary order Gauss-Legendre
@@ -86,6 +96,13 @@ int main()
   ImplicitRungeKutta stepper(rhs, a, b, c);
   */
 
+  /*
+  // calculating c with numerical recipies functions
+  int n = 2;  // number of points of Lauss-Legendre-Quadrature
+  double x[2], w[2];  // arrays für points und weights
+  gauleg(-1.0, 1.0, 2, x, w);
+  ImplicitRungeKutta stepper(rhs, a, b, c);
+*/
 
   std::ofstream outfile ("output_test_ode.txt");
   std::cout << 0.0 << "  " << y(0) << " " << y(1) << std::endl;
