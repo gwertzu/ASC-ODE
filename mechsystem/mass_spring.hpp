@@ -3,6 +3,8 @@
 
 #include <nonlinfunc.hpp>
 #include <timestepper.hpp>
+#include <autodiff.hpp>
+#include <iostream>
 
 using namespace ASC_ode;
 
@@ -207,19 +209,12 @@ public:
   
   virtual void evaluateDeriv (VectorView<double> x, MatrixView<double> df) const override
   {
-    // TODO: exact differentiation
-    double eps = 1e-8;
-    Vector<> xl(dimX()), xr(dimX()), fl(dimF()), fr(dimF());
-    for (size_t i = 0; i < dimX(); i++)
-      {
-        xl = x;
-        xl(i) -= eps;
-        xr = x;
-        xr(i) += eps;
-        evaluate (xl, fl);
-        evaluate (xr, fr);
-        df.col(i) = 1/(2*eps) * (fr-fl);
+    for (size_t i = 0; i < dimX(); i++) {
+      AutoDiff<1> temp = Variable<0>(x[i]);
+      for (size_t j = 0; j < dimF(); j++) {
+        df.col(i)[j] = temp.deriv()[0];
       }
+    }
   }
   
 };
