@@ -51,12 +51,28 @@ public:
   std::array<Connector,2> connectors;
 };
 
+class Rigid
+{
+public:
+  double length;
+  double stiffness;
+  std::array<Connector,2> connectors;
+
+  Rigid(double len, Connector c1, Connector c2, double stiff = 1000000)
+    : length(len), stiffness(stiff)
+  {
+    connectors[0] = c1;
+    connectors[1] = c2;    
+  }
+};
+
 template <int D>
 class MassSpringSystem
 {
   std::vector<Fix<D>> m_fixes;
   std::vector<Mass<D>> m_masses;
   std::vector<Spring> m_springs;
+  std::vector<Rigid> m_rigids;
   Vec<D> m_gravity=0.0;
 public:
   void setGravity (Vec<D> gravity) { m_gravity = gravity; }
@@ -80,6 +96,12 @@ public:
     return m_springs.size()-1;
   }
 
+  size_t addRigid (Rigid r)
+  {
+    m_rigids.push_back (r);
+    return m_rigids.size()-1;
+  }
+  
   auto & fixes() { return m_fixes; } 
   auto & masses() { return m_masses; } 
   auto & springs() { return m_springs; }
@@ -128,6 +150,11 @@ std::ostream & operator<< (std::ostream & ost, MassSpringSystem<D> & mss)
   for (auto sp : mss.springs())
     ost << "length = " << sp.length << ", stiffness = " << sp.stiffness
         << ", C1 = " << sp.connectors[0] << ", C2 = " << sp.connectors[1] << std::endl;
+
+  ost << "rigids: " <<std::endl;
+  for (auto r : mss.m_rigids())
+    ost << "length = " << r.length << ", stiffness = " << r.stiffness
+        << ", C1 = " << r.connectors[0] << ", C2 = " << r.connectors[1] << std::endl;
   return ost;
 }
 
