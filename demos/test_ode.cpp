@@ -39,7 +39,7 @@ public:
 int main()
 {
   double tend = 4*M_PI;
-  int steps = 100;
+  int steps = 500;
   double tau = tend/steps;
 
   Vector<> y = { 1, 0 };  // initializer list
@@ -50,7 +50,11 @@ int main()
   //ImprovedEuler stepper(rhs);
   //CrankNicolson stepper(rhs);
 
-
+  //Explicit Runge-Kutta - RK4
+  Matrix<> RK4_a = {{0,0,0,0},{0.5,0,0,0},{0,0.5,0,0},{0,0,1,0}};
+  Vector<> RK4_b = {1.0/6, 1.0/3, 1.0/3, 1.0/6};
+  Vector<> RK4_c = {0,0.5,0.5,1};
+  ExplicitRungeKutta stepper(rhs,RK4_a,RK4_b,RK4_c);
 
 /*
   Vector<> Radau(2), RadauWeight(2); // two point Radau IIa needs Radau(2) and RaduaWeight(2)
@@ -67,14 +71,14 @@ int main()
   // RungeKutta stepper(rhs, Gauss2a, Gauss2b, Gauss2c);
   //auto [Gauss2a,Gauss2b] = ComputeABfromC (Gauss2c);
   //std::cout << "Gauss2a = " << Gauss2a << std::endl;
-  //std::cout << "Gauss2b = " << Gauss2a << std::endl;
+  //std::cout << "Gauss2b = " << Gauss2b << std::endl;
   
   
   // Gauss3c .. points tabulated, compute a,b:
-  auto [Gauss3a,Gauss3b] = ComputeABfromC (Gauss3c);
-  std::cout << "Gauss3a = " << Gauss3a << std::endl;
-  std::cout << "Gauss3b = " << Gauss3a << std::endl;
-  ExplicitRungeKutta stepper(rhs, Gauss3a, Gauss3b, Gauss3c);
+  //auto [Gauss3a,Gauss3b] = ComputeABfromC (Gauss3c);
+  //std::cout << "Gauss3a = " << Gauss3a << std::endl;
+  //std::cout << "Gauss3b = " << Gauss3b << std::endl;
+  //ImplicitRungeKutta stepper(rhs, Gauss3a, Gauss3b, Gauss3c);
   
 
   /*

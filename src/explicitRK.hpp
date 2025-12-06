@@ -5,6 +5,7 @@
 #include <matrix.hpp>
 #include <cmath>
 #include <vector>
+#include <iostream>
 
 namespace ASC_ode {
   using namespace nanoblas;
@@ -13,18 +14,15 @@ namespace ASC_ode {
   {
     Matrix<> m_a;
     Vector<> m_b, m_c;
-    std::shared_ptr<NonlinearFunction> m_equ;
-    std::shared_ptr<Parameter> m_tau;
     int m_stages;
     int m_n;
     Vector<> m_k, m_y;
-    Vector<> m_yold;
+    //Vector<> m_yold;
   public:
     ExplicitRungeKutta(std::shared_ptr<NonlinearFunction> rhs,
       const Matrix<> &a, const Vector<> &b, const Vector<> &c) 
     : TimeStepper(rhs), m_a(a), m_b(b), m_c(c),
-    m_tau(std::make_shared<Parameter>(0.0)),
-    m_stages(c.size()), m_n(rhs->dimX()), m_k(m_stages*m_n), m_y(m_stages*m_n), m_yold(m_stages*m_n)
+    m_stages(c.size()), m_n(rhs->dimX()), m_k(m_stages*m_n), m_y(m_stages*m_n)
     {
 
     }
@@ -32,17 +30,14 @@ namespace ASC_ode {
       for (int j = 0; j < m_stages; j++) {
           m_y.range(j * m_n, (j + 1) * m_n) = y;
       }
-      m_yold = m_y;
 
-      m_tau->set(tau);
-      m_k = 0.0;
-
-      Vector<> rhs(m_stages * m_n);
-      for (int i = 0; i < m_stages; i++) {
-          m_equ->evaluate(m_y.range(i * m_n, (i + 1) * m_n), rhs.range(i * m_n, (i + 1) * m_n));
+      for (int j = 0; j < m_stages; j++) {
+          VectorView<> stage_in = m_y.range(0,m_n);
+          for (int i = 0; i < j; i++) {
+            stage_in += tau*m_a(j,i)*m_k.range(i*m_n, (i+1)*m_n);
+          }
+          this->m_rhs->evaluate(stage_in, m_k.range(j * m_n, (j + 1) * m_n));
       }
-
-      NewtonSolver(m_equ, m_k);
 
       // next step:
       for (int j = 0; j < m_stages; j++) {
