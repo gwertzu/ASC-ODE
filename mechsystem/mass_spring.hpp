@@ -106,6 +106,7 @@ public:
   auto & fixes() { return m_fixes; } 
   auto & masses() { return m_masses; } 
   auto & springs() { return m_springs; }
+  auto & rigids() { return m_rigids; }
 
   void getState (VectorView<> values, VectorView<> dvalues, VectorView<> ddvalues)
   {
@@ -153,7 +154,7 @@ std::ostream & operator<< (std::ostream & ost, MassSpringSystem<D> & mss)
         << ", C1 = " << sp.connectors[0] << ", C2 = " << sp.connectors[1] << std::endl;
 
   ost << "rigids: " <<std::endl;
-  for (auto r : mss.m_rigids())
+  for (auto r : mss.rigids())
     ost << "length = " << r.length << ", stiffness = " << r.stiffness
         << ", C1 = " << r.connectors[0] << ", C2 = " << r.connectors[1] << std::endl;
   return ost;
