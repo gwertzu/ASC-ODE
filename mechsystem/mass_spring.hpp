@@ -4,7 +4,6 @@
 #include <nonlinfunc.hpp>
 #include <timestepper.hpp>
 #include <autodiff.hpp>
-#include <iostream>
 
 using namespace ASC_ode;
 
