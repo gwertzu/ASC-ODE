@@ -2,6 +2,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
+#include <pybind11/numpy.h>
 
 #include "mass_spring.hpp"
 #include "Newmark.hpp"
@@ -16,11 +17,17 @@ PYBIND11_MODULE(mass_spring, m) {
     m.doc() = "mass-spring-system simulator"; 
 
     py::class_<Mass<2>> (m, "Mass2d")
-          .def_property("mass",
+      .def_property("mass",
                     [](Mass<2> & m) { return m.mass; },
                     [](Mass<2> & m, double mass) { m.mass = mass; })
       .def_property_readonly("pos",
-                             [](Mass<2> & m) { return m.pos.data(); });
+                             [](Mass<2> & m) { return m.pos.data(); })
+      .def_property("vel", 
+                  [](Mass<2>& m) { return m.vel.data(); },
+                  [](Mass<2>& m, const std::array<double, 2>& v) { m.vel = Vec<2>{v[0], v[1]}; })
+      .def_property("acc", 
+                  [](Mass<2>& m) { return m.acc.data(); },
+                  [](Mass<2>& m, const std::array<double, 2>& a) { m.acc = Vec<2>{a[0], a[1]}; });
 
       ;
       
@@ -35,7 +42,14 @@ PYBIND11_MODULE(mass_spring, m) {
                     [](Mass<3> & m) { return m.mass; },
                     [](Mass<3> & m, double mass) { m.mass = mass; })
       .def_property_readonly("pos",
-                             [](Mass<3> & m) { return m.pos.data(); });
+                             [](Mass<3> & m) { return m.pos.data(); })
+      .def_property("vel", 
+                  [](Mass<3>& m) { return m.vel.data(); },
+                  [](Mass<3>& m, const std::array<double, 3>& v) { m.vel = Vec<3>{v[0], v[1], v[2]}; }) 
+      .def_property("acc", 
+                  [](Mass<3>& m) { return m.acc.data(); },
+                  [](Mass<3>& m, const std::array<double, 3>& a) { m.acc = Vec<3>{a[0], a[1], a[2]}; }); 
+
     ;
 
     m.def("Mass", [](double m, std::array<double,3> p)
@@ -79,6 +93,14 @@ PYBIND11_MODULE(mass_spring, m) {
     py::bind_vector<std::vector<Spring>>(m, "Springs");        
     
     
+    py::class_<Rigid>(m, "Rigid")
+        .def(py::init<double, Connector, Connector, double>(),
+            py::arg("length"), py::arg("c1"), py::arg("c2"), py::arg("stiffness") = 1000000)
+        .def_readwrite("length", &Rigid::length)
+        .def_readwrite("stiffness", &Rigid::stiffness)
+        .def_readwrite("connectors", &Rigid::connectors);
+
+
     py::class_<MassSpringSystem<2>> (m, "MassSpringSystem2d")
       .def(py::init<>())
       .def("add", [](MassSpringSystem<2> & mss, Mass<2> m) { return mss.addMass(m); })
@@ -97,6 +119,7 @@ PYBIND11_MODULE(mass_spring, m) {
       .def("add", [](MassSpringSystem<3> & mss, Mass<3> m) { return mss.addMass(m); })
       .def("add", [](MassSpringSystem<3> & mss, Fix<3> f) { return mss.addFix(f); })
       .def("add", [](MassSpringSystem<3> & mss, Spring s) { return mss.addSpring(s); })
+      .def("add", [](MassSpringSystem<3> & mss, Rigid r) { return mss.addRigid(r); })
       .def_property_readonly("masses", [](MassSpringSystem<3> & mss) -> auto& { return mss.masses(); })
       .def_property_readonly("fixes", [](MassSpringSystem<3> & mss) -> auto& { return mss.fixes(); })
       .def_property_readonly("springs", [](MassSpringSystem<3> & mss) -> auto& { return mss.springs(); })
