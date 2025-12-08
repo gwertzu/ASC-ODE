@@ -5,7 +5,6 @@
 #include <matrix.hpp>
 #include <cmath>
 #include <vector>
-#include <iostream>
 
 namespace ASC_ode {
   using namespace nanoblas;
