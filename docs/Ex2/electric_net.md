@@ -7,43 +7,43 @@ It is possible to simulate other physical systems than mass-spring systems. To d
 The three previously implemented time stepping methods were used to realise the solution of the ODE. All three solvers were used with 2 different time steps: 5000 and 20000 steps.
 
 ### Explicit Euler method
-```{image}../../plots/EN_Explicit_5000steps.png
+```{image} ../../plots/EN_Explicit_5000steps.png
 :width: 70%
 :align: center
 ```
 
-```{image}../../plots/EN_Explicit_20000steps.png
+```{image} ../../plots/EN_Explicit_20000steps.png
 :width: 70%
 :align: center
 ```
 
 ### Implicit Euler method
 
-```{image}../../plots/EN_Implicit_5000steps.png
+```{image} ../../plots/EN_Implicit_5000steps.png
 :width: 70%
 :align: center
 ```
 
-```{image}../../plots/EN_Implicit_20000steps.png
+```{image} ../../plots/EN_Implicit_20000steps.png
 :width: 70%
 :align: center
 ```
 
 ### Crank-Nicholson method
 
-```{image}../../plots/EN_CN_5000steps.png
+Since this method deviates the least from a physically accurate result, this method was tested with 1000 steps too:
+
+```{image} ../../plots/EN_CN_1000steps.png
 :width: 70%
 :align: center
 ```
 
-Since this method deviates the least from a physically accurate result, this method was tested with 10000 steps too:
-
-```{image}../../plots/EN_CN_10000steps.png
+```{image} ../../plots/EN_CN_5000steps.png
 :width: 70%
 :align: center
 ```
 
-```{image}../../plots/EN_CN_20000steps.png
+```{image} ../../plots/EN_CN_20000steps.png
 :width: 70%
 :align: center
 ```

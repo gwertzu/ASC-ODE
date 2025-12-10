@@ -4,27 +4,28 @@
 format: jb-book
 root: intro.md
 parts:
- - caption: Solvers based on the Euler method
- - chapters:
-  - file: Ex1/main.md
-  
- - caption: Simulating an electric network
- - chapters:
-  - file: Ex2/electric_net.md
+  - caption: Solvers based on the Euler method
+    chapters:
+    - file: Ex1/main.md
 
- - caption: Automatic Differentiation
- - chapters:
-  - file: Ex2/autodiff.md
-  
- - caption: Runge-Kutta methods
- - chapters:
-  - file: Ex2/implicitRK.md
-  - file: Ex2/explicitRK.md
-  
- - caption: Mechanical systems
- - chapters:
-  - file: Ex3/upstream_tests.md
-  - file: Ex3/experiments.md
+  - caption: Simulating an electric network
+    chapters:
+    - file: Ex2/electric_net.md
+
+  - caption: Automatic Differentiation
+    chapters:
+    - file: Ex2/autodiff.md
+
+  - caption: Runge-Kutta methods
+    chapters:
+#    - file: Ex2/implicitRK.md
+    - file: Ex2/main.md
+    - file: Ex2/explicitRK.md
+
+  - caption: Mechanical systems
+    chapters:
+    - file: Ex3/upstream_test.md
+    - file: Ex3/experiments.md
 
 
 

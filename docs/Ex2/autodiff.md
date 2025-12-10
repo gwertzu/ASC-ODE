@@ -22,12 +22,12 @@ Additional overloads were added for non-`AutoDiff` types to ensure ease of usabi
 
 To test the capabilities of the implementation, the Legendre polynomials and their first derivatives were calculated up to $n=5$ with the code in `demos/legendre.cpp`. The results are attached below:
 
-```{image}../../plots/Legendre.png
+```{image} ../../plots/Legendre.png
 :width: 70%
 :align: center
 ```
 
-```{image}../../plots/Legendre_diff.png
+```{image} ../../plots/Legendre_diff.png
 :width: 70%
 :align: center
 ```
@@ -38,14 +38,14 @@ Comparing these results to what can be seen on other websites shows tht the resu
 
 A further demonstration of the implementation is shown by simulating a pendulum with a length of 1. This was done with the Crank-Nicholson method, with a runtime of $12 \pi$, and 1000 steps, as seen in `demos/pendulumAD.cpp`.
 
-```{image}../../plots/pendulumAD-12pi-1000-CN.png
+```{image} ../../plots/pendulumAD-12pi-1000-CN.png
 :width: 70%
 :align: center
 ```
 
 Another test with 100 steps and a runtime of $4 \pi$ was done, its results are attached too:
 
-```{image}../../plots/pendulumAD-4pi-100-CN.png
+```{image} ../../plots/pendulumAD-4pi-100-CN.png
 :width: 70%
 :align: center
 ```
