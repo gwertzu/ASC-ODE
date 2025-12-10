@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Runge-Kutta methods &#8212; ASC-ODE</title>
+    <title>Implicit Runge-Kutta methods &#8212; ASC-ODE</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Ex2/main';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -194,8 +196,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Runge-Kutta methods</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Runge-Kutta methods</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Implicit Runge-Kutta methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explicitRK.html">Explicit Runge-Kutta methods</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mechanical systems</span></p>
@@ -355,7 +356,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Runge-Kutta methods</h1>
+    <h1>Implicit Runge-Kutta methods</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -365,17 +366,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Runge-Kutta methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-methods">implicit Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-2-two-point-radau">Gauss-Legendre 2 &amp; two-point Radau</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-3-three-point-raudau">Gauss-Legendre 3 &amp; three-point Raudau</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-2-two-point-radau">Gauss-Legendre 2 &amp; two-point Radau</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-3-three-point-raudau">Gauss-Legendre 3 &amp; three-point Raudau</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-method">explicit Method</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -386,49 +379,64 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="runge-kutta-methods">
-<h1>Runge-Kutta methods<a class="headerlink" href="#runge-kutta-methods" title="Link to this heading">#</a></h1>
-<section id="implicit-methods">
-<h2>implicit Methods<a class="headerlink" href="#implicit-methods" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="implicit-runge-kutta-methods">
+<h1>Implicit Runge-Kutta methods<a class="headerlink" href="#implicit-runge-kutta-methods" title="Link to this heading">#</a></h1>
+<p>The implementation of the implicit Runge-Kutta methods can handle any Butcher tableu. There is also a useful utility included, <code class="docutils literal notranslate"><span class="pre">ComputeABfromC</span></code>, that allows the calculation of the <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> coefficients of such a tableu from the known <span class="math notranslate nohighlight">\(c\)</span> coefficients.</p>
 <section id="gauss-legendre-2-two-point-radau">
-<h3>Gauss-Legendre 2 &amp; two-point Radau<a class="headerlink" href="#gauss-legendre-2-two-point-radau" title="Link to this heading">#</a></h3>
-<p>Using the c-coefficients from Gauss-Legendre 2 and two-point Radau IIA for calculating a- and b-coefficients brings following values:</p>
-<p>Radau IIa gives following Output:
-c = 0.333333, 1
-weight = 1, 1.11022e-16</p>
-<p>ComputeABfromC for Radau IIa gives:
-a = 0.416667, -0.0833333
-[comment]: &lt;&gt; (0.75 0.25 (weights))
-b = 0.75, 0.25</p>
-<p>same for GaussLegendre2:
-a = 0.25, -0.0386751
-[comment]: &lt;&gt; (0.538675, 0.25 (weights))</p>
-<p>b = 0.25 -0.0386751
-[comment]: &lt;&gt; (0.538675 0.25 (weights))</p>
-<p>As one can see, the a and b coefficients for both schemes are different.</p>
+<h2>Gauss-Legendre 2 &amp; two-point Radau<a class="headerlink" href="#gauss-legendre-2-two-point-radau" title="Link to this heading">#</a></h2>
+<p>Using the <span class="math notranslate nohighlight">\(c\)</span>-coefficients from Gauss-Legendre 2 and two-point Radau IIA for calculating <span class="math notranslate nohighlight">\(a\)</span>- and <span class="math notranslate nohighlight">\(b\)</span>-coefficients give the following values:</p>
+<ul>
+<li><p>For the Radau IIa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mf">0.333333</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.11022e-16</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ComputeABfromC</span></code> for Radau IIa gives:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.416667</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0833333</span>
+    <span class="mf">0.75</span> <span class="mf">0.25</span> <span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.25</span>
+</pre></div>
+</div>
+</li>
+<li><p>The same for Gauss-Legendre 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0386751</span> 
+    <span class="mf">0.538675</span><span class="p">,</span> <span class="mf">0.25</span> <span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">-</span><span class="mf">0.0386751</span> 
+    <span class="mf">0.538675</span> <span class="mf">0.25</span> <span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>FIX: <span class="math notranslate nohighlight">\(b\)</span> musn’t be a matrix, it should be a vector!!!</p>
+</li>
+</ul>
+<p>As one can see, the <span class="math notranslate nohighlight">\(a\)</span> and the <span class="math notranslate nohighlight">\(b\)</span> coefficients for the schemes are different.</p>
 </section>
 <section id="gauss-legendre-3-three-point-raudau">
-<h3>Gauss-Legendre 3 &amp; three-point Raudau<a class="headerlink" href="#gauss-legendre-3-three-point-raudau" title="Link to this heading">#</a></h3>
-<p>c-coefficients for different Runge-Kutta schemes can easlily be taken out of <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Runge%E2%80%93Kutta_methods">this website</a>. Following the a- and b-coefficients for the Gauss-Legendre 3 and three-point Raudau are calculated with this library.
-Gauss Legendre 3:
-a = 0.138889 -0.0359767 0.00978944
-[comment]: &lt;&gt; (0.300263 0.222222 -0.0224854)
-[comment]: &lt;&gt; (0.267988 0.480421 0.138889)</p>
-<p>b = 0.138889 -0.0359767 0.00978944
-[comment]: &lt;&gt; (0.300263 0.222222 -0.0224854)
-[comment]: &lt;&gt; (0.267988 0.480421 0.138889)</p>
-<p>3-point Radau IIa:
-a = 0.336001 0.383173 -0.0583286
-[comment]: &lt;&gt; (-0.0551008 0.17626 0.0214456)
-[comment]: &lt;&gt; (0.542571 0.36854 0.0888893)
-b = 0.542571, 0.36854, 0.0888893</p>
-<p>As in the chapter before, the parameter of Gauss-Legendre 3 are three-point Raudau again different, as expected.</p>
+<h2>Gauss-Legendre 3 &amp; three-point Raudau<a class="headerlink" href="#gauss-legendre-3-three-point-raudau" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(c\)</span>-coefficients for different Runge-Kutta schemes can easily be read out of <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Runge%E2%80%93Kutta_methods">this website</a>. Following the <span class="math notranslate nohighlight">\(a\)</span>- and <span class="math notranslate nohighlight">\(b\)</span>-coefficients for the Gauss-Legendre 3 and three-point Raudau are calculated with this library.</p>
+<ul>
+<li><p>Gauss-Legendre 3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.138889</span> <span class="o">-</span><span class="mf">0.0359767</span> <span class="mf">0.00978944</span> 
+    <span class="mf">0.300263</span> <span class="mf">0.222222</span> <span class="o">-</span><span class="mf">0.0224854</span>
+    <span class="mf">0.267988</span> <span class="mf">0.480421</span> <span class="mf">0.138889</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.138889</span> <span class="o">-</span><span class="mf">0.0359767</span> <span class="mf">0.00978944</span> 
+<span class="p">[</span><span class="n">comment</span><span class="p">]:</span> <span class="o">&lt;&gt;</span> <span class="p">(</span><span class="mf">0.300263</span> <span class="mf">0.222222</span> <span class="o">-</span><span class="mf">0.0224854</span><span class="p">)</span>
+<span class="p">[</span><span class="n">comment</span><span class="p">]:</span> <span class="o">&lt;&gt;</span> <span class="p">(</span><span class="mf">0.267988</span> <span class="mf">0.480421</span> <span class="mf">0.138889</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>FIX: <span class="math notranslate nohighlight">\(b\)</span> musn’t be a matrix, it should be a vector!!!</p>
+</li>
+<li><p>3-point Radau IIa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.336001</span> <span class="mf">0.383173</span> <span class="o">-</span><span class="mf">0.0583286</span> 
+    <span class="o">-</span><span class="mf">0.0551008</span> <span class="mf">0.17626</span> <span class="mf">0.0214456</span>
+    <span class="mf">0.542571</span> <span class="mf">0.36854</span> <span class="mf">0.0888893</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.542571</span><span class="p">,</span> <span class="mf">0.36854</span><span class="p">,</span> <span class="mf">0.0888893</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>As in the section before, the parameter of Gauss-Legendre 3 are three-point Raudau again different, as expected.</p>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="explicit-method">
-<h1>explicit Method<a class="headerlink" href="#explicit-method" title="Link to this heading">#</a></h1>
-<p>In this package, also an explicit Runge-Kutta method is implemented.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -495,17 +503,9 @@ b = 0.542571, 0.36854, 0.0888893</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Runge-Kutta methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-methods">implicit Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-2-two-point-radau">Gauss-Legendre 2 &amp; two-point Radau</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-3-three-point-raudau">Gauss-Legendre 3 &amp; three-point Raudau</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-2-two-point-radau">Gauss-Legendre 2 &amp; two-point Radau</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-legendre-3-three-point-raudau">Gauss-Legendre 3 &amp; three-point Raudau</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-method">explicit Method</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>
