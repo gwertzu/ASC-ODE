@@ -43,22 +43,28 @@ The result of this simulation in phase space is shown here:
 
 ## Installation
 
-install XXX-odesolver it via git-clone:
+Clone ASC-ODE via `git clone`:
 
-    git clone https://github.com/my-github-clone/my-ode-solver.git
+    git clone https://github.com/gwertzu/ASC-ODE.git
 
 
-To configure and build some tests do
+To configure and build some tests and demos do
 
-    cd my-ode-solver
+```bash
+    cd ASC-ODE
     mkdir build
     cd build
     cmake ..
     make
-    
+```
 
 ## Available time-stepping methods are
-...
+ - Explicit Euler
+ - Implicit Euler
+ - Improved Euler
+ - Crank-Nicholson
+ - Implicit Runge-Kutta
+ - Explicit Runge-Kutta
 
 
 
