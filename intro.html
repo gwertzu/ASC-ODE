@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Simulating the mass-spring system with different time-stepping methods &#8212; ASC-ODE</title>
+    <title>Welcome to ASC-ODE’s documentation! &#8212; ASC-ODE</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -59,9 +59,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'main';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Simulating the mass-spring system with different time-stepping methods" href="Ex1/main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,11 +178,35 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Simulating the mass-spring system with different time-stepping methods
+                    Welcome to ASC-ODE’s documentation!
                 </a>
             </li>
         </ul>
-        
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solvers based on the Euler method</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex1/main.html">Simulating the mass-spring system with different time-stepping methods</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulating an electric network</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex2/electric_net.html">Simulating an electric network</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automatic Differentiation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex2/autodiff.html">Automatic Differentiation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Runge-Kutta methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex2/main.html">Runge-Kutta methods</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ex2/explicitRK.html">Explicit Runge-Kutta methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mechanical systems</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ex3/upstream_test.html">(TODO) Tests from upstream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ex3/experiments.html">(TODO) Experminents using the extended implementation</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -223,7 +248,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/gwertzu/ASC-ODE.git" target="_blank"
+<a href="https://github.com/JSchoeberl/IntroSC.git" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -249,7 +274,7 @@
       
       
       
-      <li><a href="_sources/main.md" target="_blank"
+      <li><a href="_sources/intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -333,7 +358,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Simulating the mass-spring system with different time-stepping methods</h1>
+    <h1>Welcome to ASC-ODE’s documentation!</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -343,16 +368,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Simulating the mass-spring system with different time-stepping methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-euler-method">Explicit Euler method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-improvedeuler-method">The <code class="docutils literal notranslate"><span class="pre">ImprovedEuler</span></code> method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-method">Implicit Euler method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicolson-method">Crank-Nicolson method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-time-stepping-methods-are">Available time-stepping methods are</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -363,47 +381,75 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="simulating-the-mass-spring-system-with-different-time-stepping-methods">
-<h1>Simulating the mass-spring system with different time-stepping methods<a class="headerlink" href="#simulating-the-mass-spring-system-with-different-time-stepping-methods" title="Link to this heading">#</a></h1>
-<p>The first exercise focused on the different time-stepping methods and their behavior for different runtimes and number of steps. All the simulations were done on the same mass-spring system, ensuring ease of comparison.</p>
-<section id="explicit-euler-method">
-<h2>Explicit Euler method<a class="headerlink" href="#explicit-euler-method" title="Link to this heading">#</a></h2>
-<p>First the mass-spring system was simulated with the explicit Euler method that was supplied with the upstream version of <code class="docutils literal notranslate"><span class="pre">ASC-ODE</span></code>, with a simulation time of <span class="math notranslate nohighlight">\(10\pi\)</span>, and 100 steps. The attached plots of the time evolution and the phase plot show that this method is susceptible to numerical instability, resulting in physically impossible behavior (that is, gaining energy).</p>
-<a class="reference internal image-reference" href="_images/ExplicitEuler.png"><img alt="_images/ExplicitEuler.png" class="align-center" src="_images/ExplicitEuler.png" style="width: 70%;" />
+  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-asc-ode-s-documentation">
+<h1>Welcome to ASC-ODE’s documentation!<a class="headerlink" href="#welcome-to-asc-ode-s-documentation" title="Link to this heading">#</a></h1>
+<p>ASC-ODE is is a C++ library for solving ordinary differential equations (ODEs).
+The equation is defined by the right hand side function.
+ASC-ODE provides various time-steppers which may be used for odes with right hand sides
+given by a function object.</p>
+<p>A small demo for solving a mass-spring model as first order ODE</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{eqnarray*}
+y_0^\prime &amp; = &amp; y_1 \\
+y_1^\prime &amp; = &amp; -\frac{k}{m} y_0
+\end{eqnarray*}\]</div>
+<p>is here:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">tend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="o">*</span><span class="n">M_PI</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tend</span><span class="o">/</span><span class="n">steps</span><span class="p">;</span>
+
+<span class="n">Vector</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w">  </span><span class="c1">// initial conditions</span>
+<span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">NonlinearFunction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MassSpring</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span><span class="w"> </span><span class="n">stiffness</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="n">ExplicitEuler</span><span class="w"> </span><span class="nf">stepper</span><span class="p">(</span><span class="n">rhs</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">     </span><span class="n">stepper</span><span class="p">.</span><span class="n">DoStep</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The result of this simulation in phase space is shown here:</p>
+<a class="reference internal image-reference" href="_images/massspring_phase.png"><img alt="_images/massspring_phase.png" class="align-center" src="_images/massspring_phase.png" style="width: 40%;" />
 </a>
-<a class="reference internal image-reference" href="_images/ExplicitEulerPhasePlot.png"><img alt="_images/ExplicitEulerPhasePlot.png" class="align-center" src="_images/ExplicitEulerPhasePlot.png" style="width: 70%;" />
-</a>
-<p>Furthermore, the longer the runtime, the more likely it is that the values reach the maximal storable value, resulting in <code class="docutils literal notranslate"><span class="pre">inf</span></code> in the file storing the results, and also <code class="docutils literal notranslate"><span class="pre">nan</span></code> values if run further. This can be avoided by selecting lower runtimes or more steps.</p>
-<p>But it is also possible to use different methods, allowing these limitations to be bypassed without such compromises.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Clone ASC-ODE via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/gwertzu/ASC-ODE.git
+</pre></div>
+</div>
+<p>To configure and build some tests and demos do</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nb">cd</span><span class="w"> </span>ASC-ODE
+<span class="w">    </span>mkdir<span class="w"> </span>build
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>build
+<span class="w">    </span>cmake<span class="w"> </span>..
+<span class="w">    </span>make
+</pre></div>
+</div>
 </section>
-<section id="the-improvedeuler-method">
-<h2>The <code class="docutils literal notranslate"><span class="pre">ImprovedEuler</span></code> method<a class="headerlink" href="#the-improvedeuler-method" title="Link to this heading">#</a></h2>
-<p>One of these methods is the <code class="docutils literal notranslate"><span class="pre">ImprovedEuler</span></code> method, that is defined in a way such that these errors are lower. The system, that was simulated above, seems to conserve the energy better with this method, as shown by the time evolution and the phase plot too, without changing the runtime or the number of steps.</p>
-<a class="reference internal image-reference" href="_images/ImprovedEuler.png"><img alt="_images/ImprovedEuler.png" class="align-center" src="_images/ImprovedEuler.png" style="width: 70%;" />
-</a>
-<a class="reference internal image-reference" href="_images/ImprovedEulerPhasePlot.png"><img alt="_images/ImprovedEulerPhasePlot.png" class="align-center" src="_images/ImprovedEulerPhasePlot.png" style="width: 70%;" />
-</a>
+<section id="available-time-stepping-methods-are">
+<h2>Available time-stepping methods are<a class="headerlink" href="#available-time-stepping-methods-are" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Explicit Euler</p></li>
+<li><p>Implicit Euler</p></li>
+<li><p>Improved Euler</p></li>
+<li><p>Crank-Nicholson</p></li>
+<li><p>Implicit Runge-Kutta</p></li>
+<li><p>Explicit Runge-Kutta</p></li>
+</ul>
 </section>
-<section id="implicit-euler-method">
-<h2>Implicit Euler method<a class="headerlink" href="#implicit-euler-method" title="Link to this heading">#</a></h2>
-<p>Another method that seems promising was the implicit Euler method. This time-stepping method was run for shorter times (<span class="math notranslate nohighlight">\(4\pi\)</span>) than the previous two, because it suffers from numerical inaccuracies, resulting in system behaving in an unexpected way. In this case, however, instead of <em>gaining</em> energy, the system <em>loses</em> energy, as shown below.</p>
-<a class="reference internal image-reference" href="_images/ImplicitEuler.png"><img alt="_images/ImplicitEuler.png" class="align-center" src="_images/ImplicitEuler.png" style="width: 70%;" />
-</a>
-<a class="reference internal image-reference" href="_images/ImplicitEulerPhasePlot.png"><img alt="_images/ImplicitEulerPhasePlot.png" class="align-center" src="_images/ImplicitEulerPhasePlot.png" style="width: 70%;" />
-</a>
-</section>
-<section id="crank-nicolson-method">
-<h2>Crank-Nicolson method<a class="headerlink" href="#crank-nicolson-method" title="Link to this heading">#</a></h2>
-<p>The last method tested was the Crank-Nicolson method. This one seems to preserve the energy of the system for the same runtime as the implicit Euler method, making it look like a promising candidate for accurate numerical simulation of the system.</p>
-<a class="reference internal image-reference" href="_images/CrankNicolson.png"><img alt="_images/CrankNicolson.png" class="align-center" src="_images/CrankNicolson.png" style="width: 70%;" />
-</a>
-<a class="reference internal image-reference" href="_images/CrankNicolsonPhasePlot.png"><img alt="_images/CrankNicolsonPhasePlot.png" class="align-center" src="_images/CrankNicolsonPhasePlot.png" style="width: 70%;" />
-</a>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="conclusion">
-<h1>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
-<p>Based on the above plots, only 2 methods were able to conserve the energy for the entire runtime, with these being the <code class="docutils literal notranslate"><span class="pre">ImprovedEuler</span></code> and the Crank-Nicolson. The two other Euler methods either gained or lost a significant amount of energy during the runtime, making them unsuitable for simulating systems with a long runtime without having a large number of steps, that would result in a long calculation.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -436,6 +482,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="right-next"
+       href="Ex1/main.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Simulating the mass-spring system with different time-stepping methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -452,16 +507,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Simulating the mass-spring system with different time-stepping methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-euler-method">Explicit Euler method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-improvedeuler-method">The <code class="docutils literal notranslate"><span class="pre">ImprovedEuler</span></code> method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-method">Implicit Euler method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicolson-method">Crank-Nicolson method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-time-stepping-methods-are">Available time-stepping methods are</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>
@@ -475,7 +523,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By NSSC1 Team 5
+By Joe Smith
 </p>
 
   </div>
