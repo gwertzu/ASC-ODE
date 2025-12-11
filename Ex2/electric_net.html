@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -384,38 +384,39 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="simulating-an-electric-network">
 <h1>Simulating an electric network<a class="headerlink" href="#simulating-an-electric-network" title="Link to this heading">#</a></h1>
-<p>It is possible to simulate other physical systems than mass-spring systems. To demonstrate this, a simple electric network of an AC power source, a capacitor and a resistance were simulated.</p>
+<p>It is possible to simulate other physical systems than mass-spring systems. To demonstrate this, a simple electric network of an AC power source, a capacitor and a resistance were simulated. The source code for this resides in <code class="docutils literal notranslate"><span class="pre">src/electric_network_demo.cpp</span></code>.</p>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
-<p>The three previously implemented time stepping methods were used to realise the solution of the ODE. All three solvers were used with 2 different time steps: 5000 and 20000 steps.</p>
+<p>The three previously implemented time stepping methods were used to realise the solution of the ODE. All three solvers were used with 2 different time steps (unless mentioned otherwise): 5000 and 20000 steps.</p>
 <section id="explicit-euler-method">
 <h3>Explicit Euler method<a class="headerlink" href="#explicit-euler-method" title="Link to this heading">#</a></h3>
-<a class="reference internal image-reference" href="../_images/EN_Explicit_5000steps.png"><img alt="../_images/EN_Explicit_5000steps.png" class="align-center" src="../_images/EN_Explicit_5000steps.png" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/0EN_Expl_5000steps.png"><img alt="../_images/0EN_Expl_5000steps.png" class="align-center" src="../_images/0EN_Expl_5000steps.png" style="width: 70%;" />
 </a>
-<a class="reference internal image-reference" href="../_images/EN_Explicit_20000steps.png"><img alt="../_images/EN_Explicit_20000steps.png" class="align-center" src="../_images/EN_Explicit_20000steps.png" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/0EN_Expl_20000steps.png"><img alt="../_images/0EN_Expl_20000steps.png" class="align-center" src="../_images/0EN_Expl_20000steps.png" style="width: 70%;" />
 </a>
 </section>
 <section id="implicit-euler-method">
 <h3>Implicit Euler method<a class="headerlink" href="#implicit-euler-method" title="Link to this heading">#</a></h3>
-<a class="reference internal image-reference" href="../_images/EN_Implicit_5000steps.png"><img alt="../_images/EN_Implicit_5000steps.png" class="align-center" src="../_images/EN_Implicit_5000steps.png" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/0EN_Impl_5000steps.png"><img alt="../_images/0EN_Impl_5000steps.png" class="align-center" src="../_images/0EN_Impl_5000steps.png" style="width: 70%;" />
 </a>
-<a class="reference internal image-reference" href="../_images/EN_Implicit_20000steps.png"><img alt="../_images/EN_Implicit_20000steps.png" class="align-center" src="../_images/EN_Implicit_20000steps.png" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/0EN_Impl_20000steps.png"><img alt="../_images/0EN_Impl_20000steps.png" class="align-center" src="../_images/0EN_Impl_20000steps.png" style="width: 70%;" />
 </a>
 </section>
 <section id="crank-nicholson-method">
 <h3>Crank-Nicholson method<a class="headerlink" href="#crank-nicholson-method" title="Link to this heading">#</a></h3>
 <p>Since this method deviates the least from a physically accurate result, this method was tested with 1000 steps too:</p>
-<a class="reference internal image-reference" href="../_images/EN_CN_1000steps.png"><img alt="../_images/EN_CN_1000steps.png" class="align-center" src="../_images/EN_CN_1000steps.png" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/0EN_CN_1000steps.png"><img alt="../_images/0EN_CN_1000steps.png" class="align-center" src="../_images/0EN_CN_1000steps.png" style="width: 70%;" />
 </a>
-<a class="reference internal image-reference" href="../_images/EN_CN_5000steps.png"><img alt="../_images/EN_CN_5000steps.png" class="align-center" src="../_images/EN_CN_5000steps.png" style="width: 70%;" />
+<p>The other two, larger step sizes don’t show any significant signs of deviation from the physically accurate result:</p>
+<a class="reference internal image-reference" href="../_images/0EN_CN_5000steps.png"><img alt="../_images/0EN_CN_5000steps.png" class="align-center" src="../_images/0EN_CN_5000steps.png" style="width: 70%;" />
 </a>
-<a class="reference internal image-reference" href="../_images/EN_CN_20000steps.png"><img alt="../_images/EN_CN_20000steps.png" class="align-center" src="../_images/EN_CN_20000steps.png" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/0EN_CN_20000steps.png"><img alt="../_images/0EN_CN_20000steps.png" class="align-center" src="../_images/0EN_CN_20000steps.png" style="width: 70%;" />
 </a>
 </section>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
-<p>The above plots are similar to those seen for the mass-spring system in the previous section: the explicit Euler method “blows up”, the implicit Euler converges to 0, and the Crank-Nicholson is the most physically accurate time-stepping method.</p>
+<p>The above plots are similar to those seen for the mass-spring system in the previous section: the explicit Euler method “blows up” as time goes on, the implicit Euler converges to 0, and the Crank-Nicholson is the most physically accurate time-stepping method, with unwelcome effects only becoming noticable with lower step sizes.</p>
 </section>
 </section>
 
