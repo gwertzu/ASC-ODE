@@ -201,8 +201,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mechanical systems</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Ex3/upstream_test.html">(TODO) Tests from upstream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Ex3/experiments.html">(TODO) Experminents using the extended implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Ex3/upstream_test.html">(TODO) Tests from upstream</a></li>
 </ul>
 
     </div>
@@ -400,13 +400,11 @@ document.write(`
 </div>
 </li>
 <li><p>The same for Gauss-Legendre 2:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0386751</span> 
-    <span class="mf">0.538675</span><span class="p">,</span> <span class="mf">0.25</span> <span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">-</span><span class="mf">0.0386751</span> 
-    <span class="mf">0.538675</span> <span class="mf">0.25</span> <span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.249931</span> <span class="o">-</span><span class="mf">0.038652</span> 
+    <span class="mf">0.538652</span> <span class="mf">0.250069</span> <span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span> 
 </pre></div>
 </div>
-<p>FIX: <span class="math notranslate nohighlight">\(b\)</span> musn’t be a matrix, it should be a vector!!!</p>
 </li>
 </ul>
 <p>As one can see, the <span class="math notranslate nohighlight">\(a\)</span> and the <span class="math notranslate nohighlight">\(b\)</span> coefficients for the schemes are different.</p>
@@ -416,15 +414,12 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(c\)</span>-coefficients for different Runge-Kutta schemes can easily be read out of <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Runge%E2%80%93Kutta_methods">this website</a>. Following the <span class="math notranslate nohighlight">\(a\)</span>- and <span class="math notranslate nohighlight">\(b\)</span>-coefficients for the Gauss-Legendre 3 and three-point Raudau are calculated with this library.</p>
 <ul>
 <li><p>Gauss-Legendre 3:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.138889</span> <span class="o">-</span><span class="mf">0.0359767</span> <span class="mf">0.00978944</span> 
-    <span class="mf">0.300263</span> <span class="mf">0.222222</span> <span class="o">-</span><span class="mf">0.0224854</span>
-    <span class="mf">0.267988</span> <span class="mf">0.480421</span> <span class="mf">0.138889</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mf">0.138889</span> <span class="o">-</span><span class="mf">0.0359767</span> <span class="mf">0.00978944</span> 
-<span class="p">[</span><span class="n">comment</span><span class="p">]:</span> <span class="o">&lt;&gt;</span> <span class="p">(</span><span class="mf">0.300263</span> <span class="mf">0.222222</span> <span class="o">-</span><span class="mf">0.0224854</span><span class="p">)</span>
-<span class="p">[</span><span class="n">comment</span><span class="p">]:</span> <span class="o">&lt;&gt;</span> <span class="p">(</span><span class="mf">0.267988</span> <span class="mf">0.480421</span> <span class="mf">0.138889</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.138812</span> <span class="o">-</span><span class="mf">0.0359386</span> <span class="mf">0.00977867</span>  
+    <span class="mf">0.300207</span> <span class="mf">0.222293</span> <span class="o">-</span><span class="mf">0.0225003</span>
+    <span class="mf">0.267928</span> <span class="mf">0.480525</span> <span class="mf">0.138895</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.277707</span><span class="p">,</span> <span class="mf">0.444587</span><span class="p">,</span> <span class="mf">0.277707</span>
 </pre></div>
 </div>
-<p>FIX: <span class="math notranslate nohighlight">\(b\)</span> musn’t be a matrix, it should be a vector!!!</p>
 </li>
 <li><p>3-point Radau IIa:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.336001</span> <span class="mf">0.383173</span> <span class="o">-</span><span class="mf">0.0583286</span> 
