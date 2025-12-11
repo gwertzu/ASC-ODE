@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>(TODO) Experminents using the extended implementation &#8212; ASC-ODE</title>
+    <title>Experminents using the extended implementation &#8212; ASC-ODE</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -199,7 +199,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mechanical systems</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">(TODO) Experminents using the extended implementation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Experminents using the extended implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upstream_test.html">(TODO) Tests from upstream</a></li>
 </ul>
 
@@ -354,7 +354,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>(TODO) Experminents using the extended implementation</h1>
+    <h1>Experminents using the extended implementation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -365,7 +365,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation">Automatic differentiation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests">Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crane">Crane</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">Chain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spinning-top">Spinning top</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -377,15 +382,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="todo-experminents-using-the-extended-implementation">
-<h1>(TODO) Experminents using the extended implementation<a class="headerlink" href="#todo-experminents-using-the-extended-implementation" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="experminents-using-the-extended-implementation">
+<h1>Experminents using the extended implementation<a class="headerlink" href="#experminents-using-the-extended-implementation" title="Link to this heading">#</a></h1>
 <section id="automatic-differentiation">
 <h2>Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Link to this heading">#</a></h2>
 <p>The upstream version didn’t use automatic differentiation, instead it relied on numeric diffrentiation. Changing this to use the <code class="docutils literal notranslate"><span class="pre">src/autodiff.hpp</span></code> from this library ensures better accuracy.</p>
 </section>
-<section id="tests">
-<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">#</a></h2>
-<p>Please upload tests already done and extend this!</p>
+<section id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Link to this heading">#</a></h2>
+<p>The experiments below are implemented in the <code class="docutils literal notranslate"><span class="pre">mechsystem/*.ipynb</span></code>.</p>
+<section id="crane">
+<h3>Crane<a class="headerlink" href="#crane" title="Link to this heading">#</a></h3>
+<p>This is implemented in <code class="docutils literal notranslate"><span class="pre">mechsystem/crane.ipynb</span></code>. In the renderer window one can se this <em>(running speed depends on the computer’s speed)</em>:</p>
+<a class="reference internal image-reference" href="../_images/crane_vibration.gif"><img alt="../_images/crane_vibration.gif" class="align-center" src="../_images/crane_vibration.gif" style="width: 40%;" />
+</a>
+</section>
+<section id="chain">
+<h3>Chain<a class="headerlink" href="#chain" title="Link to this heading">#</a></h3>
+<p>This is implemented in <code class="docutils literal notranslate"><span class="pre">mechsystem/mass_spring.ipynb</span></code>. In the renderer window one can se this <em>(running speed depends on the computer’s speed)</em>:</p>
+<a class="reference internal image-reference" href="../_images/chain.gif"><img alt="../_images/chain.gif" class="align-center" src="../_images/chain.gif" style="width: 40%;" />
+</a>
+</section>
+<section id="spinning-top">
+<h3>Spinning top<a class="headerlink" href="#spinning-top" title="Link to this heading">#</a></h3>
+<p>Not done yet!</p>
+</section>
 </section>
 </section>
 
@@ -454,7 +475,12 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation">Automatic differentiation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tests">Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crane">Crane</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">Chain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spinning-top">Spinning top</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
