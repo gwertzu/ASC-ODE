@@ -24,7 +24,6 @@ Using the $c$-coefficients from Gauss-Legendre 2 and two-point Radau IIA for cal
        0.538652 0.250069 (weights)
    b = 0.5, 0.5 
    ```
-   FIX: $b$ musn't be a matrix, it should be a vector!!!
 
 As one can see, the $a$ and the $b$ coefficients for the schemes are different.
 
