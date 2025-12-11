@@ -20,10 +20,9 @@ Using the $c$-coefficients from Gauss-Legendre 2 and two-point Radau IIA for cal
 
  - The same for Gauss-Legendre 2:
    ```
-   a = 0.25, -0.0386751 
-       0.538675, 0.25 (weights)
-   b = 0.25 -0.0386751 
-       0.538675 0.25 (weights)
+   a = 0.249931 -0.038652 
+       0.538652 0.250069 (weights)
+   b = 0.5, 0.5 
    ```
    FIX: $b$ musn't be a matrix, it should be a vector!!!
 
@@ -34,14 +33,11 @@ $c$-coefficients for different Runge-Kutta schemes can easily be read out of [th
 
  - Gauss-Legendre 3:
    ```
-   a = 0.138889 -0.0359767 0.00978944 
-       0.300263 0.222222 -0.0224854
-       0.267988 0.480421 0.138889
-   b = 0.138889 -0.0359767 0.00978944 
-   [comment]: <> (0.300263 0.222222 -0.0224854)
-   [comment]: <> (0.267988 0.480421 0.138889)
+   a = 0.138812 -0.0359386 0.00977867  
+       0.300207 0.222293 -0.0225003
+       0.267928 0.480525 0.138895
+   b = 0.277707, 0.444587, 0.277707
    ```
-   FIX: $b$ musn't be a matrix, it should be a vector!!!
 
  - 3-point Radau IIa:
    ```

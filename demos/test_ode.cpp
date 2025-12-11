@@ -49,12 +49,13 @@ int main()
   //ImplicitEuler stepper(rhs);
   //ImprovedEuler stepper(rhs);
   //CrankNicolson stepper(rhs);
-
+/*
   //Explicit Runge-Kutta - RK4
   Matrix<> RK4_a = {{0,0,0,0},{0.5,0,0,0},{0,0.5,0,0},{0,0,1,0}};
   Vector<> RK4_b = {1.0/6, 1.0/3, 1.0/3, 1.0/6};
   Vector<> RK4_c = {0,0.5,0.5,1};
   ExplicitRungeKutta stepper(rhs,RK4_a,RK4_b,RK4_c);
+*/
 
 /*
   Vector<> Radau(2), RadauWeight(2); // two point Radau IIa needs Radau(2) and RaduaWeight(2)
@@ -81,15 +82,17 @@ int main()
   //ImplicitRungeKutta stepper(rhs, Gauss3a, Gauss3b, Gauss3c);
   
 
-  /*
+  
   // arbitrary order Gauss-Legendre
-  int stages = 5;
+  int stages = 3;
   Vector<> c(stages), b1(stages);
   GaussLegendre(c, b1);
 
   auto [a, b] = ComputeABfromC(c);
+  std::cout << "Gauss-Legendre_c = " << c << ", weight = " << b1 <<  std::endl;
+  std::cout << "GaussLegendre_a = " << a << ", GaussLegendre_b = " << b <<  std::endl;
   ImplicitRungeKutta stepper(rhs, a, b, c);
-  */
+  
 
   /* 
   // arbitrary order Radau
