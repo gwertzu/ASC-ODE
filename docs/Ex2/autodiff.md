@@ -32,7 +32,7 @@ To test the capabilities of the implementation, the Legendre polynomials and the
 :align: center
 ```
 
-Comparing these results to what can be seen on other websites shows tht the results are the same.
+Comparing these results to what can be seen on other websites shows that the results are the same.
 
 ### Simulating a pendulum
 

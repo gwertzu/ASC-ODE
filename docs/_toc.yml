@@ -18,14 +18,14 @@ parts:
 
   - caption: Runge-Kutta methods
     chapters:
-#    - file: Ex2/implicitRK.md
     - file: Ex2/main.md
     - file: Ex2/explicitRK.md
 
   - caption: Mechanical systems
     chapters:
-    - file: Ex3/upstream_test.md
-    - file: Ex3/experiments.md
+    - file: Ex3/mass_spring.ipynb
+    - file: Ex3/crane.ipynb
+    - file: Ex3/spinningTop.ipynb
 
 
 
