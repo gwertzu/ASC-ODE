@@ -27,7 +27,7 @@ Using the $c$-coefficients from Gauss-Legendre 2 and two-point Radau IIA for cal
 
 As one can see, the $a$ and the $b$ coefficients for the schemes are different.
 
-## Gauss-Legendre 3 & three-point Raudau
+## Gauss-Legendre 3 & three-point Radau
 $c$-coefficients for different Runge-Kutta schemes can easily be read out of [this website](https://en.wikipedia.org/wiki/List_of_Runge%E2%80%93Kutta_methods). Following the $a$- and $b$-coefficients for the Gauss-Legendre 3 and three-point Raudau are calculated with this library.
 
  - Gauss-Legendre 3:
