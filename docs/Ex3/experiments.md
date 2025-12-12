@@ -13,7 +13,7 @@ The experiments below are implemented in the `mechsystem/*.ipynb`.
 This is implemented in `mechsystem/crane.ipynb`. In the renderer window one can see this *(running speed depends on the computer's speed)*:
 
 ```{image} ../../plots/crane_vibration.gif
-:width: 40%
+:width: 60%
 :align: center
 ```
 
@@ -22,9 +22,14 @@ This is implemented in `mechsystem/crane.ipynb`. In the renderer window one can 
 This is implemented in `mechsystem/mass_spring.ipynb`. In the renderer window one can see this *(running speed depends on the computer's speed)*:
 
 ```{image} ../../plots/chain.gif
-:width: 40%
+:width: 60%
 :align: center
 ```
 
 ### Spinning top
-Not done yet!
+This is implemented in `mechsystem/spinningTop.ipynb`. In the renderer window one can see this: *(running speed depends on the computer's speed)*:
+
+```{image} ../../plots/spinning_top.gif
+:width: 60%
+:align: center
+```
